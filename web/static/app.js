@@ -27,8 +27,7 @@ const renderUserMessage = () => {
   // remove all question marks in query to prevent flask error
   history = replaceAll(history, "?", "");
   userInput = replaceAll(userInput, "?", "");
-  alert(history);
-  
+
   setTimeout(() => {
     renderChatbotResponse(userInput, history);
   }, 200); //todo: make this have some latency over some random normal distribution

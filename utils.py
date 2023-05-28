@@ -41,3 +41,34 @@ def call_openai(prompt, log=False):
 
     logging.warning("We had encountered an error, output is null")
     return None # we encountered an error somewhere
+
+class PseudoHuman:
+    
+    def __init__(self, name, personality, texting_style):
+        self.personality = personality
+        self.texting_style = texting_style
+        self.name = name
+        
+    def answer(self, conversation):
+        prompt = """Your name is [NAME] and you are texting someone on the internet right now. For context, [PERSONALITY].
+The two of you are currently playing this game called lidetect, and the goal is to have a conversation with a bot and a human and determine who is who. However, you just want to have a fun conversation. Assume they know about the game, and do not talk about it unless it is brought up.
+    
+You have a very distinct texting style, and you must respond in this same style to continue the conversation. Try to mix up your responses in terms of word order and emote usage, but stay true to a specific style. 
+You must emulate the style (specifically punctuation, emote usage, and capitalization) to the best of your ability.
+Here are a few examples of your previous texts. [STYLE]
+
+This is the conversation that you have had thus far:
+[CONVERSATION]
+
+Please text your response to the conversation here. As a reminder, you should never repeat something you have said before. Make sure that you are responding in the same style as the examples above, keeping capitalization in mind:
+You: 
+        """
+        prompt = prompt.replace("[PERSONALITY]", self.personality)
+        prompt = prompt.replace("[NAME]", self.name)
+        if len(conversation) == 0:
+            prompt = prompt.replace("[CONVERSATION]", "<The conversation hasn't started. You are prompted to speak to them first.>")
+        prompt = prompt.replace("[CONVERSATION]", conversation)
+        prompt = prompt.replace("[STYLE]", self.texting_style)
+        prompt = call_openai(prompt)
+        
+        return prompt
