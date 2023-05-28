@@ -24,6 +24,7 @@ names = [x.replace("\n", "") for x in open('prompts/names.prompt').readlines()]
 def ai_response(input_string, history):
     if len(input_string) == 0:
         return
+    history = history.replace("You:", "\nYou:").replace("User:", "\nUser:")
     print(history)
     ai = PseudoHuman("Jasper", personalities[0], styles[0])
     response = ai.answer(history)
