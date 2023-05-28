@@ -78,7 +78,7 @@ font-size: 1.7em;
 
 #txtInput {
 line-height: 50px;
-padding: 10px 10px;
+padding: 10px 20px;
 border: none;
 outline: none;
 caret-color: black;
@@ -89,7 +89,7 @@ font-family: "Effra";
 
 .chatbot-message,
 .user-message {
-padding: 8px;
+padding: 15px;
 background: #00c56c;
 color: var(--light-color);
 margin: 5px;
@@ -107,4 +107,15 @@ width: 45%;
 overflow-wrap: break-word;
 border-radius: 5px 5px 3px 5px;
 font-size: 1.4em;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.chat-body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.chat-body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }

@@ -14,11 +14,11 @@ app = Flask(__name__,static_url_path='',
 def home():
    return render_template('index.html')
 
-@app.route('/call_python_function/<string:input_string>')
-def call_python_function(input_string):
+@app.route('/ai_response/<string:input_string>/<string:history>')
+def ai_response(input_string, history):
     if len(input_string) == 0:
         return
-
+    print(history)
     # Invoke the Python function and get the result
     return jsonify(("hello"))
 
